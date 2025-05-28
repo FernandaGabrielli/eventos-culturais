@@ -66,11 +66,7 @@ br.recife.recentro.eventos_culturais
    mvn clean spring-boot:run
    ```  
 3. Acesse a API pelo endpoint padrão (`http://localhost:8080/api/eventos`)  
-4. A documentação Swagger deveria estar em `http://localhost:8080/swagger-ui.html` (erro atual devido a incompatibilidade de versões)
-
-## Erro conhecido
-
-A documentação Swagger apresenta falha por conta de uma incompatibilidade entre o Spring Boot 3.5.0 e a versão do springdoc-openapi (2.2.0). O erro aparece no log como `NoSuchMethodError` relacionado a `ControllerAdviceBean`. A correção será feita em futuras atualizações.
+4. A documentação Swagger está em `http://localhost:8080/swagger-ui.html`
 
 ---
 
