@@ -11,7 +11,6 @@ import java.util.Date;
 public class JwtUtil {
 
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
     private final long expirationMs = 1000 * 60 * 60; // 1 hora
 
     public String gerarToken(String username) {
@@ -19,7 +18,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS256) // explícito na v0.11+
                 .compact();
     }
 
@@ -34,7 +33,10 @@ public class JwtUtil {
 
     public boolean validarToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             return false;
